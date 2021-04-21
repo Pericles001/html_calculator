@@ -10,22 +10,25 @@ keys.addEventListener('click', e => {
         const displayedNum = display.textContent;
 
         if (!action) {
-          if(displayedNum==='0'){
-              display.textContent = keyContent;
+            if (displayedNum === '0') {
+                display.textContent = keyContent;
 
-          }else{
-              display.textContent = displayedNum + keyContent
-          }
+            } else {
+                display.textContent = displayedNum + keyContent
+            }
         }
         if (action === 'decimal') {
-         display.textContent = displayedNum + '.'
+            display.textContent = displayedNum + '.'
         }
-        /*
-     
-
         if (action === 'add' || action === 'substract' || action === 'multiply' || action === 'divide') {
-            console.log('operator key!')
+            key.classList.add('is-depressed')
         }
+        Array.from(key.parentNode.children).forEach(k => k.classList.remove('is-depressed'))
+
+
+        /*
+    
+        
 
         
         if (action === 'clear') {
