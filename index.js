@@ -11,8 +11,14 @@ keys.addEventListener('click', e => {
 
         if (!action) {
           if(displayedNum==='0'){
-              display.textContent = keyContent
+              display.textContent = keyContent;
+
+          }else{
+              display.textContent = displayedNum + keyContent
           }
+        }
+        if (action === 'decimal') {
+         display.textContent = displayedNum + '.'
         }
         /*
      
@@ -21,9 +27,7 @@ keys.addEventListener('click', e => {
             console.log('operator key!')
         }
 
-        if (action === 'decimal') {
-            console.log('decimal key!')
-        }
+        
         if (action === 'clear') {
             console.log('clear key!')
         }
