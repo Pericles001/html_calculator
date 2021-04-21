@@ -24,8 +24,13 @@ keys.addEventListener('click', e => {
         if (action === 'add' || action === 'substract' || action === 'multiply' || action === 'divide') {
             key.classList.add('is-depressed');
             calculator.dataset.previousKeyType = 'operator';
+            calculator.dataset.firstValue = displayedNum;
+            calculator.dataset.operator = action;
         }
         Array.from(key.parentNode.children).forEach(k => k.classList.remove('is-depressed'))
+        if (action === 'calculate') {
+            const secondValue = displayedNum
+        }
 
 
         /*
@@ -36,9 +41,7 @@ keys.addEventListener('click', e => {
         if (action === 'clear') {
             console.log('clear key!')
         }
-        if (action === 'calculate') {
-            console.log('equal key!')
-        }
+      
         */
     }
 })
