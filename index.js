@@ -8,9 +8,10 @@ keys.addEventListener('click', e => {
         const action = key.dataset.action;
         const keyContent = key.textContent;
         const displayedNum = display.textContent;
+        const previousKeyType = calculator.dataset.previousKeyType;
 
         if (!action) {
-            if (displayedNum === '0') {
+            if (displayedNum === '0' || previousKeyType === 'operator') {
                 display.textContent = keyContent;
 
             } else {
@@ -21,7 +22,8 @@ keys.addEventListener('click', e => {
             display.textContent = displayedNum + '.'
         }
         if (action === 'add' || action === 'substract' || action === 'multiply' || action === 'divide') {
-            key.classList.add('is-depressed')
+            key.classList.add('is-depressed');
+            calculator.dataset.previousKeyType = 'operator';
         }
         Array.from(key.parentNode.children).forEach(k => k.classList.remove('is-depressed'))
 
