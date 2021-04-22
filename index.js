@@ -9,6 +9,20 @@ keys.addEventListener('click', e => {
         const keyContent = key.textContent;
         const displayedNum = display.textContent;
         const previousKeyType = calculator.dataset.previousKeyType;
+        const calculate = (n1, operator, n2) => {
+            let result = '';
+            if (operator === 'add') {
+                result = parseFloat(n1) + parseFloat(n2)
+            } else if (operator === 'substract') {
+                result = parseFloat(n1) - parseFloat(n2)
+            } else if (operator === 'multiply') {
+                result = parseFloat(n1) * parseFloat(n2)
+            } else if (operator === 'divide') {
+                result = parseFloat(n1) / parseFloat(n2)
+            }
+
+            return result
+        }
 
         if (!action) {
             if (displayedNum === '0' || previousKeyType === 'operator') {
@@ -29,7 +43,11 @@ keys.addEventListener('click', e => {
         }
         Array.from(key.parentNode.children).forEach(k => k.classList.remove('is-depressed'))
         if (action === 'calculate') {
-            const secondValue = displayedNum
+            const firstValue = calculator.dataset.firstValue;
+            const operator = calculator.dataset.operator;
+            const secondValue = displayedNum;
+
+            display.textContent = calculate(firstValue, operator, secondValue);
         }
 
 
