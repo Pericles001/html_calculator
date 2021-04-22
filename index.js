@@ -13,7 +13,7 @@ keys.addEventListener('click', e => {
             let result = '';
             if (operator === 'add') {
                 result = parseFloat(n1) + parseFloat(n2)
-            } else if (operator === 'substract') {
+            } else if (operator === 'subtract') {
                 result = parseFloat(n1) - parseFloat(n2)
             } else if (operator === 'multiply') {
                 result = parseFloat(n1) * parseFloat(n2)
@@ -41,10 +41,24 @@ keys.addEventListener('click', e => {
             }
             calculator.dataset.previousKey = 'decimal'
         }
-        if (action === 'add' || action === 'substract' || action === 'multiply' || action === 'divide') {
+        if (action === 'add' || action === 'subtract' || action === 'multiply' || action === 'divide') {
+            const firstValue = calculator.dataset.firstValue
+            const operator = calculator.dataset.operator
+            const secondValue = displayedNum
+
+            if (firstValue && operator && previousKeyType !== 'operator') {
+                const calcValue = calculate(firstValue, operator, secondValue)
+                display.textContent = calcValue
+
+                calculator.dataset.firstValue = calcValue
+            } else {
+                calculator.dataset.firstValue = displayedNum
+            }
+
+
             key.classList.add('is-depressed');
             calculator.dataset.previousKeyType = 'operator';
-            calculator.dataset.firstValue = displayedNum;
+
             calculator.dataset.operator = action;
         }
         Array.from(key.parentNode.children).forEach(k => k.classList.remove('is-depressed'))
@@ -53,7 +67,12 @@ keys.addEventListener('click', e => {
             const operator = calculator.dataset.operator;
             const secondValue = displayedNum;
 
-            display.textContent = calculate(firstValue, operator, secondValue);
+            if (firstValue) {
+               if(previousKeyType === 'calculate'){
+                   firstValue = displayedNum
+               }
+               display.textContent = calculate(firstValue, operator, secondValue)
+            }
             calculator.dataset.previousKeyType = 'calculate'
         }
 
