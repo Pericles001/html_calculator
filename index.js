@@ -25,7 +25,7 @@ keys.addEventListener('click', e => {
         }
 
         if (!action) {
-            if (displayedNum === '0' || previousKeyType === 'operator'|| previousKeyType==='calculate') {
+            if (displayedNum === '0' || previousKeyType === 'operator' || previousKeyType === 'calculate') {
                 display.textContent = keyContent;
 
             } else {
@@ -46,7 +46,7 @@ keys.addEventListener('click', e => {
             const operator = calculator.dataset.operator
             const secondValue = displayedNum
 
-            if (firstValue && operator && previousKeyType !== 'operator'&& previousKeyType !== 'calculate') {
+            if (firstValue && operator && previousKeyType !== 'operator' && previousKeyType !== 'calculate') {
                 const calcValue = calculate(firstValue, operator, secondValue)
                 display.textContent = calcValue
 
@@ -68,11 +68,11 @@ keys.addEventListener('click', e => {
             const secondValue = displayedNum;
 
             if (firstValue) {
-               if(previousKeyType === 'calculate'){
-                   firstValue = displayedNum
-                   secondValue = calculate.dataset.modValue
-               }
-               display.textContent = calculate(firstValue, operator, secondValue)
+                if (previousKeyType === 'calculate') {
+                    firstValue = displayedNum
+                    secondValue = calculate.dataset.modValue
+                }
+                display.textContent = calculate(firstValue, operator, secondValue)
             }
             calculator.dataset.modValue = secondValue
             calculator.dataset.previousKeyType = 'calculate'
@@ -80,7 +80,23 @@ keys.addEventListener('click', e => {
 
 
         if (action === 'clear') {
+
+            if (key.textContext === 'AC') {
+                calculator.dataset.firstValue = ''
+                calculator.dataset.modValue = ''
+                calculator.dataset.operator = ''
+                calculator.dataset.previousKeyType = ''
+            } else {
+                key.textContent = 'AC'
+            }
+
+            display.textContent = 0
+
             calculator.dataset.previousKeyType = 'clear'
+        }
+        if (action !== 'clear') {
+            const clearButton = calculator.querySelector('[data-action=clear]')
+            clearButton.textContent = 'CE'
         }
 
 
